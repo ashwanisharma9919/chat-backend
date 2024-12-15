@@ -7,7 +7,15 @@ const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000", // Local development
+      "https://chat-app-frontend-steel-eight.vercel.app", // Deployed frontend
+    ],
+    credentials: true, // Allow cookies and authentication headers
+  })
+);
 app.use(express.json());
 
 mongoose
