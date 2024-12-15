@@ -10,8 +10,8 @@ require("dotenv").config();
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // Local development
-      "https://chat-app-frontend-steel-eight.vercel.app", // Deployed frontend
+      "http://localhost:3000", 
+      "https://chat-app-frontend-steel-eight.vercel.app", 
     ],
     credentials: true, // Allow cookies and authentication headers
   })
@@ -42,10 +42,13 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
-    credentials: true,
+    origin: ["http://localhost:3000", "http://127.0.0.1:3000"], // Allow both localhost and 127.0.0.1
+    methods: ["GET", "POST"], // Specify the allowed methods
+    allowedHeaders: ["my-custom-header"], // Optional: specify custom headers if any
+    credentials: true, // Allow credentials
   },
 });
+
 
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
