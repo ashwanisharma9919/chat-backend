@@ -40,11 +40,15 @@ app.use("/api/messages", messageRoutes);
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
+// Configure Socket.IO
 const io = socket(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://127.0.0.1:3000"], // Allow both localhost and 127.0.0.1
-    methods: ["GET", "POST"], // Specify the allowed methods
-    allowedHeaders: ["my-custom-header"], // Optional: specify custom headers if any
+    origin: [
+      "http://localhost:3000",
+      "https://chat-app-frontend-steel-eight.vercel.app", // Include deployed front-end URL
+    ],
+    methods: ["GET", "POST"], // Allowed HTTP methods
+    allowedHeaders: ["my-custom-header"], // Optional: specify custom headers
     credentials: true, // Allow credentials
   },
 });
